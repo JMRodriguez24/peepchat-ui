@@ -1,22 +1,31 @@
----
 language: node_js
 node_js:
-  - "4"
-
+- '4'
+env:
+  - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 sudo: false
-
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 before_install:
-  - npm config set spin false
-  - npm install -g bower
-  - npm install phantomjs-prebuilt
-
+- npm config set spin false
+- npm install -g bower
+- npm install phantomjs-prebuilt
 install:
-  - npm install
-  - bower install
-
+- npm install
+- bower install
 script:
-  - npm test
+- npm test
+deploy:
+  provider: heroku
+  api_key:
+    secure: MrvIj70cmJFc58QNVbcyN/kMdAl1d22edAIWqO6lbui618roO94W9INoMPaa+n8BAqQYoYv5ITpSFJgga34/iKdFf8thbtRSD6PJT7+0Ko5nYA3dzMa8ckpDOKDdY8KUuimOTMbb89iE/t4Obk/YftBQHP0cbzUFF73mQBOANN1qZkIzLvYoYbtGe7qej4LmKp2KIil6DCDUaiQh75x0qNYvYsu4NaQ5fYSn90dFok7igvZNddFl9uhgSUE5LM+0BWpyZmztTuy9oZpaEvYiQoLJvPm1VkmvVPUwE8i+I5Qt7G445sk7kmwljTms0h+B3FlRYOrTMIqfMTi1yNSx0Cdpm5X+PPCt5bDZrj4rWe1UMrpraaA9L3bYfFCp0rEij3YCAxLlHeKXfq9f32Z3gyiqqCsQSScndNfIdWAa9G5mDVNjqJSuaJa3j71sg+/Q7t4CARrI2R401bO1IkQPXYiOY9KR8vaPBQI7PrKnagmh6drdEDlL7B5Uj8WAEeKYV63xirDyuNOUW2ts1k6dSAAPF509uQTfuhk7znkrxMIOXeOViGnRf+pP8FqUpAgz7QBEfreX7vFMp8I5VxHk5M1aFQ3ftsnegoC2ui8OTnTcD1uEpPL1QnC3e1uS0y3sGqERH8L8UGdKuhYxp3q+48iP1amrVzgG6bZE5kQ7yiY=
+  app: nameless-dawn-75149
+  on:
+    repo: JMRodriguez24/peepchat-ui
